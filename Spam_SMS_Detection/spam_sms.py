@@ -1,8 +1,3 @@
-# ---------------------------------------------
-# Spam SMS Detection using Machine Learning
-# Internship Project - CODSOFT
-# ---------------------------------------------
-
 import pandas as pd
 import matplotlib.pyplot as plt
 
@@ -18,10 +13,7 @@ from sklearn.metrics import (
     auc
 )
 
-# ----------------------------
 # Load Dataset
-# ----------------------------
-
 df = pd.read_csv("spam.csv", encoding='latin-1')
 
 # Remove unnecessary columns
@@ -34,33 +26,21 @@ print("First 5 Rows:")
 print(df.head())
 
 print("\nDataset Shape:", df.shape)
-
-# ----------------------------
-# Convert Labels
 # ham = 0
 # spam = 1
-# ----------------------------
 
 df["label"] = df["label"].map({"ham": 0, "spam": 1})
-
-# ----------------------------
-# Features and Target
-# ----------------------------
 
 X = df["message"]
 y = df["label"]
 
-# ----------------------------
 # Convert Text to Numbers
-# ----------------------------
 
 vectorizer = TfidfVectorizer(stop_words='english')
 
 X = vectorizer.fit_transform(X)
 
-# ----------------------------
 # Split Dataset
-# ----------------------------
 
 X_train, X_test, y_train, y_test = train_test_split(
     X,
@@ -69,40 +49,27 @@ X_train, X_test, y_train, y_test = train_test_split(
     random_state=42
 )
 
-# ----------------------------
 # Train Model
-# ----------------------------
 
 model = MultinomialNB()
 
 model.fit(X_train, y_train)
 
-# ----------------------------
 # Predictions
-# ----------------------------
-
 y_pred = model.predict(X_test)
 
-# ----------------------------
 # Accuracy
-# ----------------------------
-
 accuracy = accuracy_score(y_test, y_pred)
 
 print("\nAccuracy:")
 print(round(accuracy * 100, 2), "%")
 
-# ----------------------------
 # Classification Report
-# ----------------------------
 
 print("\nClassification Report:\n")
 print(classification_report(y_test, y_pred))
 
-# ----------------------------
 # Confusion Matrix
-# ----------------------------
-
 cm = confusion_matrix(y_test, y_pred)
 
 disp = ConfusionMatrixDisplay(confusion_matrix=cm)
@@ -111,10 +78,6 @@ disp.plot()
 
 plt.title("Confusion Matrix")
 plt.show()
-
-# ----------------------------
-# ROC Curve
-# ----------------------------
 
 y_prob = model.predict_proba(X_test)[:, 1]
 
@@ -138,9 +101,6 @@ plt.legend(loc="lower right")
 
 plt.show()
 
-# ----------------------------
-# Interactive Prediction
-# ----------------------------
 
 print("\n----------- Spam SMS Prediction -----------")
 
