@@ -18,6 +18,4 @@ This project detects whether an SMS message is Spam or Ham using Machine Learnin
 - Scikit-learn
 - Matplotlib
 
-**Accuracy:** Approximately 96%
-
-CodSoft Machine Learning Internship - Task 4
+**Accuracy:** Approximately 96.86%
